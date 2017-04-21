@@ -475,6 +475,11 @@ that were available on 2017-01-08:
 The USE flags to use for the Node.js package on Gentoo systems. Defaults to
 ['npm', 'snapshot'].
 
+#### `manage_dep_packages`
+
+Specify if puppet-nodejs should manage dependancy packages. Disable to 
+manage them elsewhere. Defaults to `true`.
+
 ## Limitations
 
 This module has received limited testing on:
