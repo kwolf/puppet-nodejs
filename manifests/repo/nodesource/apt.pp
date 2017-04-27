@@ -5,8 +5,17 @@ class nodejs::repo::nodesource::apt {
   $ensure     = $nodejs::repo::nodesource::ensure
   $pin        = $nodejs::repo::nodesource::pin
   $url_suffix = $nodejs::repo::nodesource::url_suffix
+  $manage_dep_packages = $nodejs::repo::manage_dep_packages
 
-  ensure_packages(['apt-transport-https', 'ca-certificates'])
+  if $manage_dep_packages {
+    ensure_packages(['apt-transport-https', 'ca-certificates'])
+    $require = [
+      Package['apt-transport-https'],
+      Package['ca-certificates'],
+    ]
+  } else {
+    $require = undef
+  }
 
   include ::apt
 
@@ -23,10 +32,7 @@ class nodejs::repo::nodesource::apt {
       pin      => $pin,
       release  => $::lsbdistcodename,
       repos    => 'main',
-      require  => [
-        Package['apt-transport-https'],
-        Package['ca-certificates'],
-      ],
+      require  => $require,
     }
   }
 

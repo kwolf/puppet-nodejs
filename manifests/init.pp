@@ -22,6 +22,7 @@ class nodejs(
   $repo_proxy_username         = $nodejs::params::repo_proxy_username,
   $repo_url_suffix             = $nodejs::params::repo_url_suffix,
   $use_flags                   = $nodejs::params::use_flags,
+  $manage_dep_packages         = $nodejs::params::manage_dep_packages,
 ) inherits nodejs::params {
 
   # Validate repo_url_suffix. Not every versions of NodeJS are available
